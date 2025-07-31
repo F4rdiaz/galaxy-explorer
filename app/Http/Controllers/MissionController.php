@@ -39,33 +39,34 @@ class MissionController extends Controller
         return view('missions.create');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nama_misi' => 'required|string|max:255',
-            'tahun_peluncuran' => 'required|integer',
-            'tahun_kembali' => 'nullable|integer',
-            'tujuan' => 'required|string|max:255',
-            'keterangan' => 'nullable|string',
-            'astronot' => 'required|string',
-            'status' => 'required|in:belum,sedang,selesai',
-            'waktu_laporan' => 'required|date',
-        ]);
+   public function store(Request $request)
+{
+    $request->validate([
+        'nama_misi' => 'required|string|max:255',
+        'tahun_peluncuran' => 'required|integer',
+        'tahun_kembali' => 'nullable|integer',
+        'tujuan' => 'required|string|max:255',
+        'keterangan' => 'nullable|string',
+        'astronot' => 'required|string',
+        'status' => 'required|in:belum,sedang,selesai', // sudah diganti dari "sudah"
+        'waktu_laporan' => 'required|date',
+    ]);
 
-        Mission::create([
-            'nama_misi' => $request->nama_misi,
-            'tahun_peluncuran' => $request->tahun_peluncuran,
-            'tahun_kembali' => $request->tahun_kembali,
-            'tujuan' => $request->tujuan,
-            'keterangan' => $request->keterangan,
-            'astronot' => array_map('trim', explode(',', $request->astronot)),
-            'status' => $request->status,
-            'waktu_laporan' => $request->waktu_laporan,
-            'user_id' => Auth::id(),
-        ]);
+    Mission::create([
+        'nama_misi' => $request->nama_misi,
+        'tahun_peluncuran' => $request->tahun_peluncuran,
+        'tahun_kembali' => $request->tahun_kembali,
+        'tujuan' => $request->tujuan,
+        'keterangan' => $request->keterangan,
+        'astronot' => array_map('trim', explode(',', $request->astronot)),
+        'status' => $request->status,
+        'waktu_laporan' => $request->waktu_laporan,
+        'user_id' => Auth::id(),
+    ]);
 
-        return redirect()->route('missions.index')->with('success', 'Misi berhasil ditambahkan.');
-    }
+    return redirect()->route('missions.index')->with('success', 'Misi berhasil ditambahkan.');
+}
+
 
     public function show(Mission $mission)
     {

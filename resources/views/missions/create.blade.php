@@ -5,6 +5,17 @@
     <div class="max-w-3xl mx-auto bg-gray-800 rounded-2xl shadow-lg p-8">
         <h2 class="text-3xl font-bold text-center text-indigo-400 mb-8">🚀 Tambah Misi Antariksa Baru</h2>
 
+        {{-- TAMPILKAN ERROR VALIDASI --}}
+        @if ($errors->any())
+            <div class="mb-6 bg-red-100 text-red-800 p-4 rounded">
+                <ul class="list-disc pl-5">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="{{ route('missions.store') }}" method="POST" onsubmit="return validateForm()">
             @csrf
 
@@ -50,8 +61,8 @@
                         <select name="status" class="w-full rounded-md p-3 bg-gray-700 border border-gray-600 text-white" required>
                             <option value="">-- Pilih Status --</option>
                             <option value="belum">Belum Dikerjakan</option>
-                            <option value="sudah">Sudah Selesai</option>
                             <option value="sedang">Sedang Berlangsung</option>
+                            <option value="selesai">Sudah Selesai</option>
                         </select>
                     </div>
                 </div>

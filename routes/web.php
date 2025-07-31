@@ -75,6 +75,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('missions', MissionController::class);
     Route::resource('planets', PlanetController::class);
     Route::get('/missions/export/pdf', [MissionController::class, 'exportPdf'])->name('missions.exportPdf');
+    
+
 });
 
 // Autentikasi (Laravel Breeze / Fortify)
