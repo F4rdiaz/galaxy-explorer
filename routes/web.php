@@ -7,8 +7,9 @@ use App\Http\Controllers\PlanetController;
 use App\Models\Mission;
 use App\Models\Planet;
 
+// Redirect root (/) langsung ke halaman login
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 // Dashboard - Menampilkan grafik statistik misi dan planet
@@ -37,7 +38,7 @@ Route::get('/dashboard', function () {
     // --- Total Data ---
     $jumlahMisi = Mission::count();
     $jumlahPlanet = Planet::count();
-    
+
     // Kolom astronot wajib bertipe JSON/array (jika tidak, ini bisa error)
     $jumlahAstronot = Mission::pluck('astronot')
         ->flatten()
@@ -73,8 +74,7 @@ Route::middleware('auth')->group(function () {
     // CRUD Misi dan Planet
     Route::resource('missions', MissionController::class);
     Route::resource('planets', PlanetController::class);
-   Route::get('/missions/export/pdf', [MissionController::class, 'exportPdf'])->name('missions.exportPdf');
-
+    Route::get('/missions/export/pdf', [MissionController::class, 'exportPdf'])->name('missions.exportPdf');
 });
 
 // Autentikasi (Laravel Breeze / Fortify)
