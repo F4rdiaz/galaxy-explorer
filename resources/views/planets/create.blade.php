@@ -49,7 +49,6 @@
             e.preventDefault();
         }
 
-        const numberPattern = /\d+/;
         if (!numberPattern.test(ukuran.value) || !numberPattern.test(jarak.value)) {
             alert('Ukuran dan jarak harus mengandung angka!');
             e.preventDefault();
