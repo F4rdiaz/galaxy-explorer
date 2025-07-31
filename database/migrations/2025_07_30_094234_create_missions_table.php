@@ -18,7 +18,7 @@ return new class extends Migration
             $table->year('tahun_kembali')->nullable();
             $table->string('tujuan');
             $table->text('keterangan');
-            $table->json('nama_astronot'); // 
+            $table->json('astronot'); // 
             $table->enum('status', ['belum', 'sedang', 'selesai'])->default('belum');
             $table->timestamp('waktu_laporan')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
